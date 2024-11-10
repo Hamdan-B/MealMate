@@ -1,0 +1,177 @@
+.cont {
+  height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 60px;
+}
+.geminiCont {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+.optionsCont {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+.dishFinderRespCont {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.cont input {
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.cont input:focus {
+  border-color: #6c63ff;
+  background-color: #fff;
+}
+.cont select {
+  padding: 10px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #f9f9f9;
+  appearance: none;
+  outline: none;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.cont select:focus {
+  border-color: #6c63ff;
+  background-color: #fff;
+}
+
+.cont option {
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  padding: 10px;
+}
+
+.cont button {
+  padding: 10px 20px;
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  color: #fff;
+  background-color: #6c63ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cont button:hover {
+  background-color: #5952cc;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.cont button:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(108, 99, 255, 0.3);
+}
+
+.cont button:active {
+  background-color: #4a42b3;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.cont p {
+  font-size: 16px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  max-width: 600px;
+}
+
+.cont p + p {
+  margin-top: 8px;
+}
+
+/* Optional: Subtle fade-in animation for dynamic content */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cont p {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60vw;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.popupDishDetailCont {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+.popupIngredients {
+  width: 100%;
+}
+.popupIngredients li {
+  list-style: none;
+  text-align: left;
+}
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
