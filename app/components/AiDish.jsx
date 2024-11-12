@@ -1,7 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./AiDish.module.css";
+import { auth } from "@/lib/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { updateDishes } from "@/lib/updateDishes";
 
 function AIDish() {
   // #region UseStates
@@ -12,6 +15,7 @@ function AIDish() {
   const [loading, setLoading] = useState(false);
   const [selectedDishIndex, setSelectedDishIndex] = useState(0);
   const [popUpOpen, setPopUpOpen] = useState(false);
+  const [userId, setUserId] = useState("");
   //#endregion
 
   // #region Basic Var(s)
@@ -32,6 +36,19 @@ function AIDish() {
   ];
 
   // #endregion
+
+  // #region Firebase Var(s)
+  const [user, userLoading, userError] = useAuthState(auth);
+  // #endregion
+
+  useEffect(() => {
+    if (user) {
+      const getData = async () => {
+        setUserId(user.uid);
+      };
+      getData();
+    }
+  }, [user]);
 
   // #region API Calls (Async Functions)
 
@@ -79,6 +96,14 @@ function AIDish() {
     setPopUpOpen(true);
   }
   // #endregion
+
+  // #region Database Handling Function
+  function saveDish(dish) {
+    updateDishes(userId, dish);
+  }
+
+  // #endregion
+
   return (
     <>
       <div className={styles.cont}>
@@ -251,6 +276,13 @@ function AIDish() {
                 }}
               >
                 Close
+              </button>
+              <button
+                onClick={() => {
+                  saveDish(geminiResp[selectedDishIndex]);
+                }}
+              >
+                Save
               </button>
             </div>
           )}
