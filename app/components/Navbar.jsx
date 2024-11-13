@@ -16,13 +16,21 @@ export default function Navbar() {
             <Link href="/">Home</Link>
           </li>
           <li>Schedular</li>
-          <li>
-            {user ? (
+
+          {user ? (
+            <li>
               <Link href="/User">User</Link>
-            ) : (
-              <Link href="/User/Register">Register</Link>
-            )}
-          </li>
+            </li>
+          ) : (
+            <>
+              <li>
+                <Link href="/User/Register">Register</Link>
+              </li>
+              <li>
+                <Link href="/User/Login">Login</Link>
+              </li>
+            </>
+          )}
           <li>Other</li>
         </ul>
       </div>

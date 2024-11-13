@@ -277,13 +277,15 @@ function AIDish() {
               >
                 Close
               </button>
-              <button
-                onClick={() => {
-                  saveDish(geminiResp[selectedDishIndex]);
-                }}
-              >
-                Save
-              </button>
+              {user && (
+                <button
+                  onClick={() => {
+                    saveDish(geminiResp[selectedDishIndex]);
+                  }}
+                >
+                  Save
+                </button>
+              )}
             </div>
           )}
         </div>

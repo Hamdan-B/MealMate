@@ -5,12 +5,20 @@ import { fetchUserData } from "@/lib/fetchUserData";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase";
 import Navbar from "../components/navbar";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 const UserPage = () => {
   // #region Database Variable(s)
   const [user, userLoading, error] = useAuthState(auth);
   const [userData, setUserData] = useState([]);
   // #endregion
+  const router = useRouter();
+
+  function handleLogout() {
+    signOut(auth);
+    router.push("/");
+  }
 
   useEffect(() => {
     if (user) {
@@ -39,6 +47,7 @@ const UserPage = () => {
               </li>
             ))}
           </ul>
+          <button onClick={handleLogout}>Logout</button>
         </div>
       )}
     </>
