@@ -3,31 +3,56 @@
 import styles from "./navbar.module.css";
 import { auth } from "@/lib/firebase";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Loading from "./Loading";
 
 export default function Navbar() {
-  const [user, loading, error] = useAuthState(auth);
+  const [user, userLoading, userError] = useAuthState(auth);
+  const [loading, setLoading] = useState(false);
+
+  const loadingHandler = () => {
+    setLoading(true);
+    console.log("Loading: ", loading);
+  };
+
   return (
     <>
+      {loading && <Loading />}
       <div className={styles.navbar}>
         <h1 className={styles.logo}>MealMate</h1>
         <ul>
           <li>
-            <Link href="/">Home</Link>
+            {usePathname() === "/" ? <p>Home</p> : <Link href="/">Home</Link>}
           </li>
           <li>Schedular</li>
 
           {user ? (
             <li>
-              <Link href="/User">User</Link>
+              {usePathname() === "/User" ? (
+                <p>User</p>
+              ) : (
+                <Link href="/User" onClick={loadingHandler}>
+                  User
+                </Link>
+              )}
             </li>
           ) : (
             <>
               <li>
-                <Link href="/User/Register">Register</Link>
+                {usePathname() === "/User/Register" ? (
+                  <p>User</p>
+                ) : (
+                  <Link href="/User/Register">Register</Link>
+                )}
               </li>
               <li>
-                <Link href="/User/Login">Login</Link>
+                {usePathname() === "/User/Login" ? (
+                  <p>User</p>
+                ) : (
+                  <Link href="/User/Login">Login</Link>
+                )}
               </li>
             </>
           )}
