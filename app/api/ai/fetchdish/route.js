@@ -13,7 +13,7 @@ export async function POST(req) {
           {
             parts: [
               {
-                text: `List ${noOfDishes} dishes and its recipes based on these ingredients ${ingredientListInput} and the dishes should be '${dishCountry}' country dishes, using this JSON schema:
+                text: `List ${noOfDishes} dishes and its recipes based on these ingredients ${ingredientListInput} and the dishes should be Halal and of '${dishCountry}' country dishes, using this JSON schema:
                 Recipe = {'dishName': string, 'dishDescription': string, 'dishCountry':string, 'dishIngredients': stringList, 'dishRecipe':stringList}
                 Return: Array<Recipe>
                 and if by any means you can't provide the dishes or the answer in the specified JSON format, just give an error using this JSON schema:
