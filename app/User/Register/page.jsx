@@ -12,8 +12,13 @@ const UserRegistration = () => {
   const handleRegistration = async (e) => {
     e.preventDefault();
     console.log("HandleRegFunction");
-    const user = await registerUser(mailTxt, passTxt, fNameTxt, lNameTxt);
-    console.log(user);
+
+    try {
+      const user = await registerUser(mailTxt, passTxt, fNameTxt, lNameTxt);
+      console.log(user);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

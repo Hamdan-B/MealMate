@@ -1,8 +1,10 @@
 import axios from "axios";
 
+//POST request to gemeini (to generate a Schedule)
 export async function POST(req) {
-  console.log("POST req recieved");
   const { noOfDays, dishCountry } = await req.json();
+
+  console.log("Schedule POST request recieved");
 
   try {
     const response = await axios({
@@ -14,11 +16,11 @@ export async function POST(req) {
             parts: [
               {
                 text: `Make a Meal schedule of ${noOfDays} days (Three Meals for each day) and also a small descrition on why this Meal Schedule, the meals should be Halal and of ${dishCountry} country using this JSON schema:
-                "Meals": [[
-                {"mealTime": "breakfast", 'dishName': string, 'dishCountry':string, 'dishIngredients': stringList, 'dishRecipe':stringList, 'dishDescription': string},
+                "Meals": [{ 
+                day: 1, meal: [{"mealTime": "breakfast", 'dishName': string, 'dishCountry':string, 'dishIngredients': stringList, 'dishRecipe':stringList, 'dishDescription': string},
                 {"mealTime": "lunch", 'dishName': string, 'dishCountry':string, 'dishIngredients': stringList, 'dishRecipe':stringList, 'dishDescription': string},
-                {"mealTime": "dinner", 'dishName': string, 'dishCountry':string, 'dishIngredients': stringList, 'dishRecipe':stringList, 'dishDescription': string}
-            ],
+                {"mealTime": "dinner", 'dishName': string, 'dishCountry':string, 'dishIngredients': stringList, 'dishRecipe':stringList, 'dishDescription': string}]
+                },
         // ... (similar structure for remaining days)
     ],
 

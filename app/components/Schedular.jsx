@@ -1,14 +1,43 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import styles from "./Schedular.module.css";
+import { auth } from "@/lib/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { updateSchedule } from "@/lib/firestoreOperations";
 
 const Schedular = () => {
   const [noOfDays, setNoOfDays] = useState(3);
   const [dishCountry, setDishCountry] = useState("Any");
   const [scheduleData, setScheduleData] = useState();
   const [dataLoading, setDataLoading] = useState(false);
+  const [popUp, setPopUp] = useState(false);
+  const [userId, setUserId] = useState("");
 
-  // #region API Calls (Async Functions)
-  async function geminiSearch() {
+  //Other Var(s)
+  const [user, userLoading, userError] = useAuthState(auth);
+
+  // Handle Country Change Input
+  const dishCountryChange = (event) => {
+    const value = event.target.value;
+    setDishCountry(value);
+  };
+
+  // Save Btn Func
+  const SaveBtn = () => {
+    updateSchedule(userId, scheduleData);
+  };
+
+  useEffect(() => {
+    if (user) {
+      const getData = async () => {
+        setUserId(user.uid);
+      };
+      getData();
+    }
+  }, [user]);
+
+  // API Calls
+  async function generateScheduleFromAPI() {
     setDataLoading(true);
 
     const response = await fetch("/api/ai/fetchschedule", {
@@ -35,15 +64,12 @@ const Schedular = () => {
 
     setScheduleData(_resp);
     setDataLoading(false);
+    setPopUp(true);
   }
-  // #endregion
 
-  const handleTypeChange = (event) => {
-    const value = event.target.value;
-    setDishCountry(value);
-  };
   return (
     <>
+      {/* INPUT STUFF */}
       <div>
         {/* DishCountry Radio */}
         <div>
@@ -53,7 +79,7 @@ const Schedular = () => {
               type="radio"
               value="Any"
               checked={dishCountry === "Any"}
-              onChange={handleTypeChange}
+              onChange={dishCountryChange}
             />
             Any
           </label>
@@ -63,7 +89,7 @@ const Schedular = () => {
               type="radio"
               value="Pakistani"
               checked={dishCountry === "Pakistani"}
-              onChange={handleTypeChange}
+              onChange={dishCountryChange}
             />
             Pakistani
           </label>
@@ -73,7 +99,7 @@ const Schedular = () => {
               type="radio"
               value="Chineese"
               checked={dishCountry === "Chineese"}
-              onChange={handleTypeChange}
+              onChange={dishCountryChange}
             />
             Chineese
           </label>
@@ -93,11 +119,35 @@ const Schedular = () => {
           </select>
         </div>
       </div>
-      <button onClick={geminiSearch}>Generate Schedule!</button>
-      {dataLoading ? (
-        <p>Loading....</p>
-      ) : (
-        <pre>{JSON.stringify(scheduleData)}</pre>
+      {/* Generate Schedule Btn */}
+      <button onClick={generateScheduleFromAPI}>Generate Schedule!</button>
+
+      {dataLoading && <p>Loading....</p>}
+
+      {/* POPUP */}
+      {popUp && (
+        <div className={styles.popupOverlay}>
+          <div className={styles.popupContent}>
+            <h1>Something</h1>
+            {/* Close & Save Btn */}
+            <button
+              onClick={() => {
+                setPopUp(false);
+              }}
+            >
+              Close
+            </button>
+            {user && (
+              <button
+                onClick={() => {
+                  SaveBtn();
+                }}
+              >
+                Save
+              </button>
+            )}
+          </div>
+        </div>
       )}
     </>
   );

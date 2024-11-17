@@ -9,14 +9,14 @@ import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 const UserPage = () => {
-  // #region Database Variable(s)
   const [user, userLoading, error] = useAuthState(auth);
   const [userData, setUserData] = useState([]);
-  // #endregion
+
   const router = useRouter();
 
-  function handleLogout() {
-    signOut(auth);
+  //Signout User
+  async function handleLogout() {
+    await signOut(auth);
     router.push("/");
   }
 
@@ -36,7 +36,9 @@ const UserPage = () => {
       {/* User Profile */}
       {userLoading && <p>Getting your info</p>}
 
-      {userData.dishes && (
+      {userData.error && <p>{userData.error}</p>}
+
+      {!userData.error && userData.dishes && (
         <div>
           <h1>{userData.firstName}</h1>
           <h1>{userData.lastName}</h1>
@@ -47,6 +49,7 @@ const UserPage = () => {
               </li>
             ))}
           </ul>
+          <pre>{JSON.stringify(userData.schedule.meals)}</pre>
           <button onClick={handleLogout}>Logout</button>
         </div>
       )}

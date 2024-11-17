@@ -1,8 +1,10 @@
 import axios from "axios";
 
+//POST request to gemeini (to generate dishes)
 export async function POST(req) {
-  console.log("POST req recieved");
   const { noOfDishes, ingredientListInput, dishCountry } = await req.json();
+
+  console.log("POST req recieved");
 
   try {
     const response = await axios({

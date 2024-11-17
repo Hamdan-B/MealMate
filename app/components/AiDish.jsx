@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import styles from "./AiDish.module.css";
 import { auth } from "@/lib/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { updateDishes } from "@/lib/updateDishes";
+import { updateDishes } from "@/lib/firestoreOperations";
 
 function AIDish() {
+  let tempIngrName = "";
+
   // #region UseStates
   const [ingredientListInput, setIngredientListInput] = useState([]);
   const [dishCountry, setDishCountry] = useState("Any");
@@ -18,29 +20,27 @@ function AIDish() {
   const [userId, setUserId] = useState("");
   //#endregion
 
-  // #region Basic Var(s)
-  let tempIngrName = "";
-
-  const sampleIngredients = [
-    "beef shank",
-    "oil",
-    "garnish",
-    "ground spices",
-    "ginger",
-    "garlic",
-    "ghee",
-    "salt",
-    "onion",
-    "star anise cinnamon bay leaf",
-    "flour",
-  ];
-
-  // #endregion
-
-  // #region Firebase Var(s)
+  // Other Var(s)
   const [user, userLoading, userError] = useAuthState(auth);
-  // #endregion
 
+  // Input Handling
+  const handleDishCountryInput = (event) => {
+    const value = event.target.value;
+    setDishCountry(value);
+  };
+
+  // Response Handling
+  const respDetailHandler = (index) => {
+    setSelectedDishIndex(index);
+    setPopUpOpen(true);
+  };
+
+  // Save Dish Button Handler
+  const saveDish = (dish) => {
+    updateDishes(userId, dish);
+  };
+
+  // Set UserID on user change
   useEffect(() => {
     if (user) {
       const getData = async () => {
@@ -50,9 +50,8 @@ function AIDish() {
     }
   }, [user]);
 
-  // #region API Calls (Async Functions)
-
-  async function geminiSearch() {
+  // API Calls
+  async function GenerateDishFromAPI() {
     setLoading(true);
 
     const response = await fetch("/api/ai/fetchdish", {
@@ -81,28 +80,6 @@ function AIDish() {
     setGeminiResp(_resp);
     setLoading(false);
   }
-  // #endregion
-
-  // #region Input Handling Functions
-  const handleTypeChange = (event) => {
-    const value = event.target.value;
-    setDishCountry(value);
-  };
-  // #endregion
-
-  // #region Response Handling Function
-  function respDetailHandler(index) {
-    setSelectedDishIndex(index);
-    setPopUpOpen(true);
-  }
-  // #endregion
-
-  // #region Database Handling Function
-  function saveDish(dish) {
-    updateDishes(userId, dish);
-  }
-
-  // #endregion
 
   return (
     <>
@@ -116,7 +93,7 @@ function AIDish() {
             {ingredientListInput.length > 0 && (
               <p>{ingredientListInput.join(",")}</p>
             )}
-            {/* Add Input/Button */}
+            {/* 'Ingredients' Input & Button */}
             <div>
               <input
                 type="text"
@@ -150,7 +127,7 @@ function AIDish() {
                     type="radio"
                     value="Any"
                     checked={dishCountry === "Any"}
-                    onChange={handleTypeChange}
+                    onChange={handleDishCountryInput}
                   />
                   Any
                 </label>
@@ -160,7 +137,7 @@ function AIDish() {
                     type="radio"
                     value="Pakistani"
                     checked={dishCountry === "Pakistani"}
-                    onChange={handleTypeChange}
+                    onChange={handleDishCountryInput}
                   />
                   Pakistani
                 </label>
@@ -170,7 +147,7 @@ function AIDish() {
                     type="radio"
                     value="Chineese"
                     checked={dishCountry === "Chineese"}
-                    onChange={handleTypeChange}
+                    onChange={handleDishCountryInput}
                   />
                   Chineese
                 </label>
@@ -191,8 +168,9 @@ function AIDish() {
               </div>
             </div>
 
-            {/* Gemeni Search Button */}
-            <button onClick={geminiSearch}>Gemini Recipies</button>
+            {/* Generate Recipes btn */}
+            <button onClick={GenerateDishFromAPI}>Generate Recipes</button>
+            {/* Temp sample input btn */}
             <button
               onClick={() => {
                 setIngredientListInput([
@@ -208,7 +186,7 @@ function AIDish() {
                   "star anise cinnamon bay leaf",
                   "flour",
                 ]);
-                geminiSearch();
+                GenerateDishFromAPI();
               }}
             >
               Sample
@@ -220,18 +198,20 @@ function AIDish() {
             {loading && <div className={styles.loader}></div>}
             {!loading && (
               <ul>
-                {geminiResp.map((_dish, index) => (
-                  <li key={index}>
-                    <h4>{_dish["dishName"]}</h4>
-                    <button
-                      onClick={() => {
-                        respDetailHandler(index);
-                      }}
-                    >
-                      Details
-                    </button>
-                  </li>
-                ))}
+                {geminiResp.error && <li>{geminiResp.error}</li>}
+                {!geminiResp.error &&
+                  geminiResp.map((_dish, index) => (
+                    <li key={index}>
+                      <h4>{_dish["dishName"]}</h4>
+                      <button
+                        onClick={() => {
+                          respDetailHandler(index);
+                        }}
+                      >
+                        Details
+                      </button>
+                    </li>
+                  ))}
               </ul>
             )}
           </div>
@@ -270,6 +250,7 @@ function AIDish() {
                   </ul>
                 </div>
               </div>
+              {/* Close & Save buttons */}
               <button
                 onClick={() => {
                   setPopUpOpen(false);

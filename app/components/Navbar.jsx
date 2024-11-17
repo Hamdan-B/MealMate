@@ -11,6 +11,7 @@ import Loading from "./Loading";
 export default function Navbar() {
   const [user, userLoading, userError] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
+  const pathname = usePathname();
 
   const loadingHandler = () => {
     setLoading(true);
@@ -23,14 +24,12 @@ export default function Navbar() {
       <div className={styles.navbar}>
         <h1 className={styles.logo}>MealMate</h1>
         <ul>
-          <li>
-            {usePathname() === "/" ? <p>Home</p> : <Link href="/">Home</Link>}
-          </li>
+          <li>{pathname === "/" ? <p>Home</p> : <Link href="/">Home</Link>}</li>
           <li>Schedular</li>
 
           {user ? (
             <li>
-              {usePathname() === "/User" ? (
+              {pathname === "/User" ? (
                 <p>User</p>
               ) : (
                 <Link href="/User" onClick={loadingHandler}>
@@ -41,15 +40,15 @@ export default function Navbar() {
           ) : (
             <>
               <li>
-                {usePathname() === "/User/Register" ? (
-                  <p>User</p>
+                {pathname === "/User/Register" ? (
+                  <p>Register</p>
                 ) : (
                   <Link href="/User/Register">Register</Link>
                 )}
               </li>
               <li>
-                {usePathname() === "/User/Login" ? (
-                  <p>User</p>
+                {pathname === "/User/Login" ? (
+                  <p>Login</p>
                 ) : (
                   <Link href="/User/Login">Login</Link>
                 )}
