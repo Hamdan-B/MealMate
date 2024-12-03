@@ -1,0 +1,46 @@
+.main {
+  background-color: #ff952d;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  position: relative;
+  z-index: 1;
+}
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0 0 0;
+}
+.contentText {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4vh;
+}
+.contentText h1 {
+  color: white;
+  font-size: 48px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+}
+.contentText p {
+  color: white;
+  font-size: 1.3em;
+  font-family: "Open Sans", serif;
+}
+.contentText button {
+  font-family: "Open Sans", serif;
+  background-color: #ff952d;
+  border: 3px solid #ffffff;
+  color: #ffffff;
+}
+.contentImg img {
+  width: 20vw;
+}
+.mainSVG {
+  width: 100%;
+  height: auto;
+  margin-top: -5.4%;
+  z-index: -1;
+}

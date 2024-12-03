@@ -1,3 +1,10 @@
+.cont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  background-color: red;
+}
 .popupOverlay {
   position: fixed;
   top: 0;

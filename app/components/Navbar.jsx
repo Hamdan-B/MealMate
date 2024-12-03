@@ -20,11 +20,19 @@ export default function Navbar() {
 
   return (
     <>
-      {loading && <Loading />}
       <div className={styles.navbar}>
-        <h1 className={styles.logo}>MealMate</h1>
+        <h1 className={styles.logo}>MEALMATE</h1>
         <ul>
-          <li>{pathname === "/" ? <p>Home</p> : <Link href="/">Home</Link>}</li>
+          <li>
+            {pathname === "/" ? (
+              <Link href="/" aria-disabled>
+                Home
+              </Link>
+            ) : (
+              <Link href="/">Home</Link>
+            )}
+          </li>
+          <li>Recipe</li>
           <li>Schedular</li>
 
           {user ? (
@@ -40,13 +48,6 @@ export default function Navbar() {
           ) : (
             <>
               <li>
-                {pathname === "/User/Register" ? (
-                  <p>Register</p>
-                ) : (
-                  <Link href="/User/Register">Register</Link>
-                )}
-              </li>
-              <li>
                 {pathname === "/User/Login" ? (
                   <p>Login</p>
                 ) : (
@@ -55,9 +56,9 @@ export default function Navbar() {
               </li>
             </>
           )}
-          <li>Other</li>
         </ul>
       </div>
+      {loading && <Loading />}
     </>
   );
 }

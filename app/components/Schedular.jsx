@@ -69,59 +69,60 @@ const Schedular = () => {
 
   return (
     <>
-      {/* INPUT STUFF */}
-      <div>
-        {/* DishCountry Radio */}
+      <div className={styles.cont}>
+        {/* INPUT STUFF */}
         <div>
-          <h3>Cuisine</h3>
-          <label>
-            <input
-              type="radio"
-              value="Any"
-              checked={dishCountry === "Any"}
-              onChange={dishCountryChange}
-            />
-            Any
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="Pakistani"
-              checked={dishCountry === "Pakistani"}
-              onChange={dishCountryChange}
-            />
-            Pakistani
-          </label>
-          <br />
-          <label>
-            <input
-              type="radio"
-              value="Chineese"
-              checked={dishCountry === "Chineese"}
-              onChange={dishCountryChange}
-            />
-            Chineese
-          </label>
+          {/* DishCountry Radio */}
+          <div>
+            <h3>Cuisine</h3>
+            <label>
+              <input
+                type="radio"
+                value="Any"
+                checked={dishCountry === "Any"}
+                onChange={dishCountryChange}
+              />
+              Any
+            </label>
+            <br />
+            <label>
+              <input
+                type="radio"
+                value="Pakistani"
+                checked={dishCountry === "Pakistani"}
+                onChange={dishCountryChange}
+              />
+              Pakistani
+            </label>
+            <br />
+            <label>
+              <input
+                type="radio"
+                value="Chineese"
+                checked={dishCountry === "Chineese"}
+                onChange={dishCountryChange}
+              />
+              Chineese
+            </label>
+          </div>
+          {/* No of Days */}
+          <div>
+            <h3>Days</h3>
+            <select
+              value={noOfDays}
+              onChange={(e) => {
+                setNoOfDays(e.target.value);
+              }}
+            >
+              <option value={3}>Three</option>
+              <option value={5}>Five</option>
+              <option value={7}>Seven</option>
+            </select>
+          </div>
         </div>
-        {/* No of Days */}
-        <div>
-          <h3>Days</h3>
-          <select
-            value={noOfDays}
-            onChange={(e) => {
-              setNoOfDays(e.target.value);
-            }}
-          >
-            <option value={3}>Three</option>
-            <option value={5}>Five</option>
-            <option value={7}>Seven</option>
-          </select>
-        </div>
+        {/* Generate Schedule Btn */}
+        <button onClick={generateScheduleFromAPI}>Generate Schedule!</button>
       </div>
-      {/* Generate Schedule Btn */}
-      <button onClick={generateScheduleFromAPI}>Generate Schedule!</button>
-
       {dataLoading && <p>Loading....</p>}
 
       {/* POPUP */}

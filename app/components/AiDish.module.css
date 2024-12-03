@@ -1,54 +1,252 @@
 .cont {
-  height: 60vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 60px;
 }
+.cont h1 {
+  font-size: 48px;
+  font-family: "Montserrat", sans-serif;
+  color: var(--foreground);
+  font-weight: 900;
+}
 .geminiCont {
   display: flex;
   align-items: center;
   gap: 50px;
 }
+.dishFinderInputCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 3vh;
+}
 .optionsCont {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 50px;
 }
+.card {
+  background-color: #ff952d;
+  color: white;
+}
+.cardContent {
+  font-family: "Montserrat", sans-serif;
+  padding: 24px;
+}
+.cardContent h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.cardContent p {
+  color: white;
+}
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.radioGroup div {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+.radioGroup div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.radioGroupItem {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.radioGroupItemLabel {
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.radioGroupItemLabelChecked {
+  color: var(--foreground);
+}
+
+.IngredientCard {
+  align-self: stretch;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.IngredientCardContent {
+  padding: 1.5rem;
+}
+.IngredientCardContent > *:not(:last-child) {
+  margin-bottom: 1.5rem;
+}
+.IngredientCardContentInput {
+  display: flex;
+  align-items: center;
+}
+.IngredientCardContentInput > *:not(:last-child) {
+  margin-right: 1rem;
+}
+.IngredientCardContentInput Input {
+  flex-grow: 1;
+  font-size: 1.125rem;
+  border-width: 2px;
+  border-color: #ff952d;
+}
+.IngredientCardContentInput Input:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #ff952d;
+}
+
+.IngredientCardContentInput Button {
+  font-family: "Montserrat", sans-serif;
+  background-color: #ff952d;
+  color: white;
+}
+.IngredientCardContentInput Button:hover {
+  background-color: #ff8b2e;
+}
+
+.IngredientCardContentOutput {
+  background-color: #fffae7;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  min-height: 200px;
+}
+.IngredientCardContentOutput h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ff952d;
+}
+.IngredientCardContentOutput div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.IngredientCardContentOutputList {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  background-color: #fef3c7;
+  border-width: 2px;
+  border-color: #ff952d;
+  color: #9c4e1f;
+  transition: all 0.3s ease;
+}
+.IngredientCardContentOutputList:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.IngredientCardContentOutputList span {
+  margin-right: 0.5rem;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.IngredientCardContentOutputList Button {
+  height: 1.5rem;
+  width: 1.5rem;
+  padding: 0;
+  border: 1px solid red;
+  border-radius: 9999px;
+  color: red;
+  transition: all 0.3s ease;
+}
+.deleteBtn:hover {
+  color: white;
+  background-color: red;
+}
+.ButtonCont {
+  display: flex;
+  justify-content: end;
+}
+
 .dishFinderRespCont {
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 20px;
+  width: 30vw;
+  height: 65vh;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.responseCont {
+  padding: 24px;
+}
+.placeHolder {
   height: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
-
-.cont select {
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-  color: #333;
-  background-color: #f9f9f9;
-  appearance: none;
-  outline: none;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-  cursor: pointer;
+.placeHolder p {
+  color: #201b127a;
+  font-weight: 600;
+  padding: 24px 24px 0 24px;
 }
-
-.cont select:focus {
-  border-color: #6c63ff;
-  background-color: #fff;
+.chefThinking {
+  width: 100%;
 }
-
-.cont option {
-  font-size: 16px;
-  color: #333;
-  background-color: #fff;
-  padding: 10px;
+.dishFinderRespCont h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff952d;
+  margin-bottom: 1rem;
 }
-
+.dishFinderRespContCard {
+  margin-top: 10px;
+  background-color: white;
+  transition: all 0.5s ease;
+}
+.dishFinderRespContCard:hover {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 100px;
+  font-size: 0.8em;
+  background-color: #fef3c7;
+  border-color: #ff952d;
+  color: #9c4e1f;
+}
+.dishFinderRespContCardContent {
+  padding: 1rem;
+}
+.dishFinderRespContCardContent div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dishFinderRespContCardContent h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.dishFinderRespContCardContent Button {
+  color: #ff952d;
+  border: 2px solid #ff9b3e;
+  transition: all 0.5s ease;
+}
+.dishFinderRespContCardContent Button:hover {
+  background-color: #ff952d;
+  color: white;
+}
 .popupOverlay {
   position: fixed;
   top: 0;
@@ -85,9 +283,16 @@
   list-style: none;
   text-align: left;
 }
+.loaderCont {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
 .loader {
   border: 8px solid #f3f3f3;
-  border-top: 8px solid #6c63ff;
+  border-top: 8px solid #ff952d;
   border-radius: 50%;
   width: 40px;
   height: 40px;

@@ -1,38 +1,32 @@
-.logo {
-  font-size: 36px;
-  font-family: "Arial", sans-serif;
-  color: #333;
-  font-weight: 600;
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  letter-spacing: 1px;
-}
-
-.logo::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 4px;
-  background-color: #6c63ff;
-  margin: 10px auto 0;
-  border-radius: 2px;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 .navbar {
+  background-color: #ff952d;
+  color: #ffffff;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
+.logo {
+  font-size: 36px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+  text-shadow: 0px 0px 8px #7e7e7e;
+  text-align: center;
+  letter-spacing: 4px;
+  padding: 10px 0 10px 0;
+}
+
 .navbar ul {
   list-style: none;
 }
 .navbar ul li {
   display: inline;
   float: left;
-  padding: 8px;
+  padding: 12px;
   transition: all 0.2s ease-in-out;
 }
 .navbar ul li:hover {
-  color: #4a42b3;
+  color: rgb(0, 0, 0);
   cursor: pointer;
 }
