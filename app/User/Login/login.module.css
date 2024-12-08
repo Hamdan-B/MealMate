@@ -1,0 +1,124 @@
+.mainformCont {
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ff952d;
+}
+/* .formCont form {
+  border: 2px solid red;
+  background-color: bisque;
+  padding: 48px;
+}
+.formCont form div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 48px;
+  color: white;
+  font-size: 32px;
+  font-weight: 900;
+  font-family: "Montserrat", sans-serif;
+} */
+
+.belowCont {
+  width: 400px;
+  margin: auto;
+  margin-top: 12px;
+  height: 50vh;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  transform-style: preserve-3d;
+  transition: all 1200ms ease;
+  transform: perspective(600px);
+}
+
+.rotClass {
+  transform: perspective(600px) rotateY(-180deg);
+}
+
+/* change translateZ value to a negative(-) value to make it appear below the Container and a poitive(+) value to make it appear on top */
+.formCont {
+  width: 200px;
+  color: white;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  text-align: center;
+  padding: 20px;
+  font-family: "Montserrat", sans-serif;
+}
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 800;
+  color: #ff952d;
+}
+.formCont input {
+  width: 80%;
+  flex-grow: 1;
+  border-width: 2px;
+  border-color: #ff952d;
+  color: #201b12;
+  font-family: "Montserrat", sans-serif;
+}
+
+.formCont input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #ff952d;
+}
+.formCont button {
+  background-color: #ff952d;
+  color: white;
+}
+.formCont button:hover {
+  background-color: #ff8b2e;
+}
+.SignIn {
+  width: 100%;
+  transform: translateY(-50%) translateX(50%) translateZ(-4rem) rotateY(180deg);
+}
+.SignUp {
+  width: 100%;
+  transform: translateY(-50%) translateX(50%) translateZ(4rem);
+}
+
+.inputStuff {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.bottomStuff span {
+  color: #ff952d;
+  font-weight: bold;
+  cursor: pointer;
+}
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #ff952d;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mainSVG {
+  width: 100%;
+  height: auto;
+  margin-top: -5.4%;
+  z-index: -1;
+}

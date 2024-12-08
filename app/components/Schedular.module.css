@@ -1,9 +1,75 @@
+.schedulerCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.schedulerCont h1 {
+  font-size: 48px;
+  font-family: "Montserrat", sans-serif;
+  color: var(--foreground);
+  font-weight: 900;
+}
 .cont {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 60px;
-  background-color: red;
+}
+.optionsCont {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+.card {
+  background-color: #ff952d;
+  color: white;
+}
+.cardContent {
+  font-family: "Montserrat", sans-serif;
+  padding: 24px;
+}
+.cardContent h2 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.cardContent p {
+  color: white;
+}
+.radioGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.radioGroup div {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.2s ease;
+}
+.radioGroup div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.radioGroupItem {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.radioGroupItemLabel {
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.radioGroupItemLabelChecked {
+  color: var(--foreground);
 }
 .popupOverlay {
   position: fixed;

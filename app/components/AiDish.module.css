@@ -21,13 +21,11 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
   gap: 3vh;
 }
 .optionsCont {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
   gap: 50px;
 }
 .card {
@@ -44,11 +42,11 @@
   font-weight: bold;
 }
 .cardContent p {
+  font-size: clamp(12px, 1vw, 16px);
   color: white;
 }
 .radioGroup {
   display: flex;
-  flex-wrap: wrap;
   gap: 4px;
 }
 .radioGroup div {
@@ -80,8 +78,8 @@
 }
 
 .IngredientCard {
-  align-self: stretch;
   width: 100%;
+  max-width: 45vw;
   background-color: white;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -182,7 +180,8 @@
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 20px;
   width: 30vw;
-  height: 65vh;
+  height: 100%;
+  position: relative;
   min-height: 50vh;
   display: flex;
   flex-direction: column;
@@ -284,11 +283,10 @@
   text-align: left;
 }
 .loaderCont {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .loader {
   border: 8px solid #f3f3f3;

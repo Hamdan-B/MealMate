@@ -20,6 +20,14 @@ const UserPage = () => {
     router.push("/");
   }
 
+  //Redirect to Login if user not signed in
+  useEffect(() => {
+    if (!userLoading && user === null) {
+      router.push("/User/Login");
+    }
+  }, [userLoading, user, router]);
+
+  //Fetch User Data if user is signed in
   useEffect(() => {
     if (user) {
       const getData = async () => {
@@ -35,6 +43,7 @@ const UserPage = () => {
       <Navbar />
       {/* User Profile */}
       {userLoading && <p>Getting your info</p>}
+      {!userLoading && user === null && <p>Kindly Login in First</p>}
 
       {userData.error && <p>{userData.error}</p>}
 

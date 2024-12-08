@@ -25,7 +25,7 @@ export default function Navbar() {
         <ul>
           <li>
             {pathname === "/" ? (
-              <Link href="/" aria-disabled>
+              <Link href="/" className={styles.active} aria-disabled>
                 Home
               </Link>
             ) : (
@@ -38,7 +38,9 @@ export default function Navbar() {
           {user ? (
             <li>
               {pathname === "/User" ? (
-                <p>User</p>
+                <Link href="/User" className={styles.active} aria-disabled>
+                  User
+                </Link>
               ) : (
                 <Link href="/User" onClick={loadingHandler}>
                   User
@@ -49,9 +51,17 @@ export default function Navbar() {
             <>
               <li>
                 {pathname === "/User/Login" ? (
-                  <p>Login</p>
+                  <Link
+                    href="/User/Login"
+                    aria-disabled
+                    className={styles.active}
+                  >
+                    Login
+                  </Link>
                 ) : (
-                  <Link href="/User/Login">Login</Link>
+                  <Link href="/User/Login" onClick={loadingHandler}>
+                    Login
+                  </Link>
                 )}
               </li>
             </>

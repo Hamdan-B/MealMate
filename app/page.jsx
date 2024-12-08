@@ -1,5 +1,6 @@
 import About from "./components/About";
 import AIDish from "./components/AiDish";
+import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Navbar from "./components/navbar";
 import Schedular from "./components/Schedular";
@@ -18,8 +19,7 @@ export default function Home() {
         <br />
         <br />
         <AIDish />
-        <hr />
-        <Schedular />
+        <Footer />
       </div>
     </>
   );

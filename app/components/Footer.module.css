@@ -1,0 +1,13 @@
+.footer {
+  position: relative;
+}
+.SVGCont {
+  margin-bottom: -1px;
+  width: 100%;
+  height: auto;
+}
+.cont {
+  padding: 48px;
+  background-color: #ff952d;
+  color: white;
+}

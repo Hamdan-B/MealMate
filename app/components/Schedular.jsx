@@ -4,9 +4,14 @@ import styles from "./Schedular.module.css";
 import { auth } from "@/lib/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { updateSchedule } from "@/lib/firestoreOperations";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Card, CardContent } from "@/components/ui/card";
 
 const Schedular = () => {
-  const [noOfDays, setNoOfDays] = useState(3);
+  const [noOfDays, setNoOfDays] = useState("Three");
   const [dishCountry, setDishCountry] = useState("Any");
   const [scheduleData, setScheduleData] = useState();
   const [dataLoading, setDataLoading] = useState(false);
@@ -15,11 +20,16 @@ const Schedular = () => {
 
   //Other Var(s)
   const [user, userLoading, userError] = useAuthState(auth);
+  const cuisineTypes = ["Any", "Pakistani", "Chineese", "Italian"];
+  const noOfDaystoGenerate = ["Three", "Five", "Seven"];
 
   // Handle Country Change Input
-  const dishCountryChange = (event) => {
-    const value = event.target.value;
+  const dishCountryChange = (value) => {
     setDishCountry(value);
+  };
+  const handleNoOfDaysInput = (value) => {
+    setNoOfDays(value);
+    console.log("changedNumber");
   };
 
   // Save Btn Func
@@ -69,60 +79,89 @@ const Schedular = () => {
 
   return (
     <>
-      <div className={styles.cont}>
-        {/* INPUT STUFF */}
-        <div>
-          {/* DishCountry Radio */}
-          <div>
-            <h3>Cuisine</h3>
-            <label>
-              <input
-                type="radio"
-                value="Any"
-                checked={dishCountry === "Any"}
-                onChange={dishCountryChange}
-              />
-              Any
-            </label>
-            <br />
-            <label>
-              <input
-                type="radio"
-                value="Pakistani"
-                checked={dishCountry === "Pakistani"}
-                onChange={dishCountryChange}
-              />
-              Pakistani
-            </label>
-            <br />
-            <label>
-              <input
-                type="radio"
-                value="Chineese"
-                checked={dishCountry === "Chineese"}
-                onChange={dishCountryChange}
-              />
-              Chineese
-            </label>
+      <div className={styles.schedulerCont}>
+        <h1>Schedule Generater</h1>
+        <div className={styles.cont}>
+          {/* INPUT STUFF */}
+          <div className={styles.optionsCont}>
+            {/* DishCountry Radio */}
+            <div>
+              <Card className={styles.card}>
+                <CardContent className={styles.cardContent}>
+                  <div>
+                    <h2>Select Cuisine Type</h2>
+                    <p>Choose your preferred cuisine style</p>
+                  </div>
+                  <RadioGroup
+                    defaultValue="any"
+                    className={styles.radioGroup}
+                    onValueChange={(value) => dishCountryChange(value)}
+                  >
+                    {cuisineTypes.map((cuisine) => (
+                      <div key={cuisine + "1"}>
+                        <RadioGroupItem
+                          value={cuisine}
+                          id={cuisine + "1"}
+                          className={styles.radioGroupItem}
+                        />
+                        <Label
+                          htmlFor={cuisine + "1"}
+                          className={
+                            dishCountry === cuisine
+                              ? styles.radioGroupItemLabelChecked
+                              : styles.radioGroupItemLabel
+                          }
+                        >
+                          {cuisine}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </CardContent>
+              </Card>
+            </div>
+            {/* No of Days */}
+            <div>
+              <Card className={styles.card}>
+                <CardContent className={styles.cardContent}>
+                  <div>
+                    <h2>Number of Days</h2>
+                    <p>Select how many days to generate meals for</p>
+                  </div>
+                  <RadioGroup
+                    defaultValue="Three"
+                    className={styles.radioGroup}
+                    onValueChange={(value) => handleNoOfDaysInput(value)}
+                  >
+                    {noOfDaystoGenerate.map((_noOfDays) => (
+                      <div key={_noOfDays + "1"}>
+                        <RadioGroupItem
+                          value={_noOfDays}
+                          id={_noOfDays + "1"}
+                          className={styles.radioGroupItem}
+                        />
+                        <Label
+                          htmlFor={_noOfDays + "1"}
+                          className={
+                            noOfDays === _noOfDays
+                              ? styles.radioGroupItemLabelChecked
+                              : styles.radioGroupItemLabel
+                          }
+                        >
+                          {_noOfDays}
+                        </Label>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-          {/* No of Days */}
-          <div>
-            <h3>Days</h3>
-            <select
-              value={noOfDays}
-              onChange={(e) => {
-                setNoOfDays(e.target.value);
-              }}
-            >
-              <option value={3}>Three</option>
-              <option value={5}>Five</option>
-              <option value={7}>Seven</option>
-            </select>
-          </div>
+          {/* Generate Schedule Btn */}
+          <button onClick={generateScheduleFromAPI}>Generate Schedule!</button>
         </div>
-        {/* Generate Schedule Btn */}
-        <button onClick={generateScheduleFromAPI}>Generate Schedule!</button>
       </div>
+
       {dataLoading && <p>Loading....</p>}
 
       {/* POPUP */}
