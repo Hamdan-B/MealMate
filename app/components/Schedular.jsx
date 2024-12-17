@@ -80,7 +80,7 @@ const Schedular = () => {
   return (
     <>
       <div className={styles.schedulerCont}>
-        <h1>Schedule Generater</h1>
+        <h1 style={{ color: "white" }}>Schedule Generater</h1>
         <div className={styles.cont}>
           {/* INPUT STUFF */}
           <div className={styles.optionsCont}>
@@ -158,7 +158,12 @@ const Schedular = () => {
             </div>
           </div>
           {/* Generate Schedule Btn */}
-          <button onClick={generateScheduleFromAPI}>Generate Schedule!</button>
+          <button
+            className={styles.generateBtn}
+            onClick={generateScheduleFromAPI}
+          >
+            Generate Schedule!
+          </button>
         </div>
       </div>
 
@@ -168,7 +173,8 @@ const Schedular = () => {
       {popUp && (
         <div className={styles.popupOverlay}>
           <div className={styles.popupContent}>
-            <h1>Something</h1>
+            <h1>Will be coded Soon!</h1>
+            <pre>{JSON.stringify(scheduleData["meals"])}</pre>
             {/* Close & Save Btn */}
             <button
               onClick={() => {

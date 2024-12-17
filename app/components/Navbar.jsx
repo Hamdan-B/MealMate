@@ -4,12 +4,14 @@ import styles from "./navbar.module.css";
 import { auth } from "@/lib/firebase";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "./Loading";
+import { fetchUserData } from "@/lib/fetchUserData";
 
 export default function Navbar() {
   const [user, userLoading, userError] = useAuthState(auth);
+  const [userName, setUserName] = useState("User");
   const [loading, setLoading] = useState(false);
   const pathname = usePathname();
 
@@ -17,6 +19,16 @@ export default function Navbar() {
     setLoading(true);
     console.log("Loading: ", loading);
   };
+
+  useEffect(() => {
+    if (user) {
+      const getData = async () => {
+        const result = await fetchUserData(user.uid);
+        setUserName(result.fullName.split(" ")[0]);
+      };
+      getData();
+    }
+  }, [user]);
 
   return (
     <>
@@ -39,11 +51,11 @@ export default function Navbar() {
             <li>
               {pathname === "/User" ? (
                 <Link href="/User" className={styles.active} aria-disabled>
-                  User
+                  {userName}
                 </Link>
               ) : (
                 <Link href="/User" onClick={loadingHandler}>
-                  User
+                  {userName}
                 </Link>
               )}
             </li>

@@ -1,10 +1,12 @@
 .schedulerCont {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
+  gap: 20px;
   align-items: center;
 }
 .schedulerCont h1 {
+  color: white;
   font-size: 48px;
   font-family: "Montserrat", sans-serif;
   color: var(--foreground);
@@ -15,7 +17,15 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 60px;
+  gap: 30px;
+}
+.cont button {
+  border-color: white;
+  color: white;
+}
+.cont button:hover {
+  background-color: white;
+  color: #ff952d;
 }
 .optionsCont {
   display: flex;
@@ -24,8 +34,8 @@
   gap: 50px;
 }
 .card {
-  background-color: #ff952d;
-  color: white;
+  background-color: white;
+  color: #ff952d;
 }
 .cardContent {
   font-family: "Montserrat", sans-serif;
@@ -37,7 +47,7 @@
   font-weight: bold;
 }
 .cardContent p {
-  color: white;
+  color: #ff952d;
 }
 .radioGroup {
   display: flex;
@@ -45,13 +55,13 @@
   gap: 4px;
 }
 .radioGroup div {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: #ff962d15;
   border-radius: 9999px;
   padding: 0.75rem 1.5rem;
   transition: background-color 0.2s ease;
 }
 .radioGroup div:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: #ff962d3a;
 }
 .radioGroupItem {
   position: absolute;
@@ -71,6 +81,7 @@
 .radioGroupItemLabelChecked {
   color: var(--foreground);
 }
+
 .popupOverlay {
   position: fixed;
   top: 0;
@@ -92,6 +103,7 @@
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
 .popupDishDetailCont {
   margin: 30px;
   display: flex;

@@ -1,0 +1,56 @@
+.mainCont {
+  background-color: #ff952d;
+  display: grid;
+  grid-template-columns: 20vw 79vw;
+  grid-template-rows: 49vh;
+}
+.UserDataCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.UserDataCont button {
+  border-color: white;
+  color: white;
+}
+.UserDataCont button:hover {
+  background-color: white;
+  color: #ff952d;
+}
+.UserInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.userImg {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: gainsboro;
+}
+.UserInfo h1 {
+  color: white;
+  font-size: 34px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 900;
+}
+.UserInfo p {
+  color: white;
+}
+.userActionBtns {
+  display: flex;
+  gap: 20px;
+}
+.OtherCont {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainSVG {
+  width: 100%;
+  height: auto;
+  /* margin-top: -5.4%; */
+  z-index: -1;
+}
