@@ -13,11 +13,6 @@ export default function Home() {
         <Navbar />
         <Hero />
         <About />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <AIDish />
         <Footer />
       </div>

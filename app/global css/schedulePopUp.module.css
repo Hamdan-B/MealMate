@@ -1,0 +1,102 @@
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60vw;
+  max-height: 90vh;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+}
+.popUpBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule {
+  max-width: 80%;
+  margin: 0 auto;
+}
+
+.day {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.day-header {
+  background-color: #005cc5;
+  color: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.meal {
+  border-top: 1px solid #ddd;
+  padding: 15px;
+}
+
+.meal:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.meal-header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #005cc5;
+  margin-bottom: 10px;
+}
+
+.dish-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.dish-country {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.ingredients,
+.recipe,
+.description {
+  margin-top: 10px;
+}
+
+.popupContent ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.popupContent li {
+  line-height: 1.5;
+}
+.popupContent button {
+  margin: 20px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #666;
+}

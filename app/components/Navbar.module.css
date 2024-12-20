@@ -32,3 +32,17 @@
 .active {
   color: #201b12;
 }
+
+@media screen and (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar ul li {
+    font-size: 14px;
+  }
+  .logo {
+    padding-bottom: 0px;
+  }
+}

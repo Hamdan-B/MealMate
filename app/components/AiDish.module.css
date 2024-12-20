@@ -1,4 +1,5 @@
 .cont {
+  margin-top: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -201,8 +202,12 @@
   color: #201b127a;
   font-weight: 600;
   padding: 24px 24px 0 24px;
+  text-align: center;
 }
 .chefThinking {
+  position: absolute;
+  bottom: 0;
+  left: 0;
   width: 100%;
 }
 .dishFinderRespCont h2 {
@@ -304,5 +309,52 @@
   }
   100% {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cont {
+    margin-top: 40px;
+    gap: 30px;
+    padding: 0 10vw 0 10vw;
+  }
+  .cont h1 {
+    font-size: 24px;
+  }
+  .geminiCont {
+    flex-direction: column;
+  }
+  .optionsCont {
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .card {
+    width: 100%;
+  }
+  .radioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+  .IngredientCard {
+    max-width: 100%;
+  }
+  .IngredientCardContentInput Input {
+    font-size: 0.7rem;
+  }
+  .IngredientCardContentOutputList {
+    font-size: 0.7rem;
+  }
+  .IngredientCardContentOutputList span {
+    margin-right: 0;
+  }
+  .dishFinderRespCont {
+    width: 100%;
+  }
+  .placeHolder p {
+    font-size: 0.7rem;
+    text-align: center;
   }
 }

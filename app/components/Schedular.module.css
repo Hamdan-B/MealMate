@@ -30,7 +30,7 @@
 .optionsCont {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 50px;
 }
 .card {
@@ -82,40 +82,32 @@
   color: var(--foreground);
 }
 
-.popupOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popupContent {
-  background: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 60vw;
-  text-align: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.popupDishDetailCont {
-  margin: 30px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
-}
-.popupIngredients {
-  width: 100%;
-}
-.popupIngredients li {
-  list-style: none;
-  text-align: left;
+@media screen and (max-width: 480px) {
+  .schedulerCont {
+    margin-top: 40px;
+    gap: 0;
+  }
+  .schedulerCont h1 {
+    font-size: 32px;
+  }
+  .cont {
+    margin-top: 40px;
+    gap: 30px;
+    padding: 0 10vw 0 10vw;
+  }
+  .optionsCont {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+  .cardContent p {
+    font-size: 0.7rem;
+  }
+  .radioGroup {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
 }

@@ -44,3 +44,35 @@
   margin-top: -5.4%;
   z-index: -1;
 }
+
+@media screen and (max-width: 480px) {
+  .main {
+    padding-left: 10vw;
+    padding-right: 10vw;
+  }
+  .contentText {
+    gap: 2vh;
+  }
+  .contentText h1 {
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .contentText p {
+    display: none;
+  }
+  .contentText button {
+    width: 100px;
+    height: 30px;
+    font-size: 8px;
+    padding: 0;
+  }
+  .contentImg img {
+    width: 40vw;
+  }
+  .mainSVG {
+    width: 100%;
+    height: auto;
+    margin-top: -2%;
+    z-index: -1;
+  }
+}

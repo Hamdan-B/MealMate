@@ -80,7 +80,7 @@ export default function Navbar() {
           )}
         </ul>
       </div>
-      {loading && <Loading />}
+      {loading && <Loading isSchedule={false} />}
     </>
   );
 }

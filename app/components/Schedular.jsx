@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import styles from "./Schedular.module.css";
+import scheduleStyles from "../global css/schedulePopUp.module.css";
 import { auth } from "@/lib/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { updateSchedule } from "@/lib/firestoreOperations";
@@ -9,6 +10,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Card, CardContent } from "@/components/ui/card";
+import Loading from "./Loading";
 
 const Schedular = () => {
   const [noOfDays, setNoOfDays] = useState("Three");
@@ -33,8 +35,10 @@ const Schedular = () => {
   };
 
   // Save Btn Func
-  const SaveBtn = () => {
-    updateSchedule(userId, scheduleData);
+  const SaveBtn = async () => {
+    setDataLoading(true);
+    await updateSchedule(userId, scheduleData);
+    setDataLoading(false);
   };
 
   useEffect(() => {
@@ -167,31 +171,76 @@ const Schedular = () => {
         </div>
       </div>
 
-      {dataLoading && <p>Loading....</p>}
+      {dataLoading && <Loading isSchedule={true} />}
 
       {/* POPUP */}
       {popUp && (
-        <div className={styles.popupOverlay}>
-          <div className={styles.popupContent}>
-            <h1>Will be coded Soon!</h1>
-            <pre>{JSON.stringify(scheduleData["meals"])}</pre>
+        <div className={scheduleStyles.popupOverlay}>
+          <div className={scheduleStyles.popupContent}>
+            <div className={scheduleStyles.schedule}>
+              {scheduleData.meals.map((day, index) => (
+                <div className={scheduleStyles.day} key={index}>
+                  <div className={scheduleStyles.dayHeader}>Day {day.day}</div>
+                  {day.meal.map((meal, mealIndex) => (
+                    <div className={scheduleStyles.meal} key={mealIndex}>
+                      <div className={scheduleStyles.mealHeader}>
+                        Meal Time: {meal.mealTime}
+                      </div>
+                      <div className={scheduleStyles.dishName}>
+                        {meal.dishName}
+                      </div>
+                      <div className={scheduleStyles.dishCountry}>
+                        Origin: {meal.dishCountry}
+                      </div>
+                      <div className={scheduleStyles.ingredients}>
+                        <strong>Ingredients:</strong>
+                        <ul>
+                          {meal.dishIngredients.map(
+                            (ingredient, ingredientIndex) => (
+                              <li key={ingredientIndex}>{ingredient}</li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                      <div className={scheduleStyles.recipe}>
+                        <strong>Recipe:</strong>
+                        <ul>
+                          {meal.dishRecipe.map((step, stepIndex) => (
+                            <li key={stepIndex}>{step}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={scheduleStyles.description}>
+                        <strong>Description:</strong> {meal.dishDescription}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <div className={scheduleStyles.footer}>
+                {scheduleData.scheduleDescription}
+              </div>
+            </div>
+
             {/* Close & Save Btn */}
-            <button
-              onClick={() => {
-                setPopUp(false);
-              }}
-            >
-              Close
-            </button>
-            {user && (
+            <div className={scheduleStyles.popUpBtn}>
               <button
                 onClick={() => {
-                  SaveBtn();
+                  setPopUp(false);
                 }}
               >
-                Save
+                Close
               </button>
-            )}
+              {user && (
+                <button
+                  onClick={() => {
+                    SaveBtn();
+                  }}
+                >
+                  Save
+                </button>
+              )}
+            </div>
           </div>
         </div>
       )}

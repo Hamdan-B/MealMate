@@ -4,15 +4,23 @@ import { useState, useEffect } from "react";
 import { fetchUserData } from "@/lib/fetchUserData";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from "@/lib/firebase";
+import { updateSchedule } from "@/lib/firestoreOperations";
 import Navbar from "../components/navbar";
 import { signOut } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import styles from "./User.module.css";
+import scheduleStyles from "../global css/schedulePopUp.module.css";
 import Schedular from "../components/Schedular";
+import Loading from "../components/Loading";
 
 const UserPage = () => {
   const [user, userLoading, error] = useAuthState(auth);
   const [userData, setUserData] = useState([]);
+
+  const [dataLoading, setDataLoading] = useState(false);
+
+  const [schedulePopUp, setSchedulePopUp] = useState(false);
+  const [recipePopUp, setRecipePopUp] = useState(false);
 
   const router = useRouter();
 
@@ -42,6 +50,7 @@ const UserPage = () => {
 
   return (
     <>
+      {dataLoading && <Loading isSchedule={false} />}
       <Navbar />
       {/* User Profile */}
       {userLoading && <p>Getting your info</p>}
@@ -64,26 +73,39 @@ const UserPage = () => {
       {!userData.error && userData.dishes && (
         <>
           <div className={styles.mainCont}>
+            {/* UserInfo */}
             <div className={styles.UserDataCont}>
+              {/* UserInfoText */}
               <div className={styles.UserInfo}>
                 <div className={styles.userImg}></div>
                 <h1>{userData.fullName}</h1>
                 <p>{userData.email}</p>
               </div>
+              {/* ActionButtons */}
               <div className={styles.userActionBtns}>
-                <button onClick={() => console.log("Recipe Btn")}>
+                <button
+                  onClick={() => {
+                    console.log("RecipeBTN");
+                  }}
+                >
                   My Recipes
                 </button>
-                <button onClick={() => console.log("Schedule Btn")}>
+                <button
+                  onClick={() => {
+                    setSchedulePopUp(true);
+                  }}
+                >
                   My Schedule
                 </button>
               </div>
+              {/* LogoutButton */}
               <div className={styles.LogoutBtn}>
                 <button onClick={handleLogout} style={{ color: "red" }}>
                   Logout
                 </button>
               </div>
             </div>
+            {/* Scheduler */}
             <div className={styles.OtherCont}>
               <Schedular />
               {/* <ul>
@@ -106,6 +128,69 @@ const UserPage = () => {
             </svg>
           </div>
         </>
+      )}
+
+      {/* Schedule POPUP */}
+      {schedulePopUp && (
+        <div className={scheduleStyles.popupOverlay}>
+          <div className={scheduleStyles.popupContent}>
+            <div className={scheduleStyles.schedule}>
+              {userData.schedule.meals.map((day, index) => (
+                <div className={scheduleStyles.day} key={index}>
+                  <div className={scheduleStyles.dayHeader}>Day {day.day}</div>
+                  {day.meal.map((meal, mealIndex) => (
+                    <div className={scheduleStyles.meal} key={mealIndex}>
+                      <div className={scheduleStyles.mealHeader}>
+                        Meal Time: {meal.mealTime}
+                      </div>
+                      <div className={scheduleStyles.dishName}>
+                        {meal.dishName}
+                      </div>
+                      <div className={scheduleStyles.dishCountry}>
+                        Origin: {meal.dishCountry}
+                      </div>
+                      <div className={scheduleStyles.ingredients}>
+                        <strong>Ingredients:</strong>
+                        <ul>
+                          {meal.dishIngredients.map(
+                            (ingredient, ingredientIndex) => (
+                              <li key={ingredientIndex}>{ingredient}</li>
+                            )
+                          )}
+                        </ul>
+                      </div>
+                      <div className={scheduleStyles.recipe}>
+                        <strong>Recipe:</strong>
+                        <ul>
+                          {meal.dishRecipe.map((step, stepIndex) => (
+                            <li key={stepIndex}>{step}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <div className={scheduleStyles.description}>
+                        <strong>Description:</strong> {meal.dishDescription}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <div className={scheduleStyles.footer}>
+                {userData.schedule.scheduleDescription}
+              </div>
+            </div>
+
+            {/* Close & Save Btn */}
+            <div className={scheduleStyles.popUpBtn}>
+              <button
+                onClick={() => {
+                  setSchedulePopUp(false);
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

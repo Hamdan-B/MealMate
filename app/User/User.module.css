@@ -1,14 +1,16 @@
 .mainCont {
   background-color: #ff952d;
-  display: grid;
-  grid-template-columns: 20vw 79vw;
-  grid-template-rows: 49vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 49vh;
 }
 .UserDataCont {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  height: 100%;
 }
 .UserDataCont button {
   border-color: white;
@@ -46,6 +48,115 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
+}
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContent {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60vw;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.popupDishDetailCont {
+  margin: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+.popupIngredients {
+  width: 100%;
+}
+.popupIngredients li {
+  list-style: none;
+  text-align: left;
+}
+
+.schedule {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.day {
+  margin-bottom: 30px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.day-header {
+  background-color: #005cc5;
+  color: white;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.meal {
+  border-top: 1px solid #ddd;
+  padding: 15px;
+}
+
+.meal:not(:last-child) {
+  border-bottom: 1px solid #ddd;
+}
+
+.meal-header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #005cc5;
+  margin-bottom: 10px;
+}
+
+.dish-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+.dish-country {
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.ingredients,
+.recipe,
+.description {
+  margin-top: 10px;
+}
+
+.popupContent ul {
+  margin: 5px 0;
+  padding-left: 20px;
+}
+
+.popupContent li {
+  line-height: 1.5;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 14px;
+  color: #666;
 }
 
 .mainSVG {
@@ -53,4 +164,14 @@
   height: auto;
   /* margin-top: -5.4%; */
   z-index: -1;
+}
+
+@media screen and (max-width: 480px) {
+  .mainCont {
+    flex-direction: column;
+    height: 130vh;
+  }
+  .OtherCont {
+    position: relative;
+  }
 }

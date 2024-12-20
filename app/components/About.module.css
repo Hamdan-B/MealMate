@@ -29,3 +29,27 @@
   font-size: 1.3em;
   font-family: "Open Sans", serif;
 }
+
+@media screen and (max-width: 480px) {
+  .main {
+    gap: 0;
+    padding: 0 10vw 0 10vw;
+  }
+  .mainText {
+    gap: 15px;
+  }
+  .mainText h1 {
+    font-size: 24px;
+  }
+  .mainText h1 b {
+    text-shadow: 0px 0px 4px #ff952d;
+    letter-spacing: 2px;
+  }
+  .mainText p {
+    font-size: 0.7em;
+    text-align: justify;
+  }
+  .mainImg img {
+    display: none;
+  }
+}

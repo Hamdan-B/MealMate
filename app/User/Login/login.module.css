@@ -38,7 +38,6 @@
   transform: perspective(600px) rotateY(-180deg);
 }
 
-/* change translateZ value to a negative(-) value to make it appear below the Container and a poitive(+) value to make it appear on top */
 .formCont {
   width: 200px;
   color: white;
@@ -121,4 +120,22 @@
   height: auto;
   margin-top: -5.4%;
   z-index: -1;
+}
+
+@media screen and (max-width: 480px) {
+  .belowCont {
+    width: 80vw;
+    margin-top: 12px;
+    height: 55vh;
+  }
+  .heading {
+    font-size: 1.5rem;
+  }
+  .formCont input {
+    width: 80%;
+    font-size: 0.75rem;
+  }
+  .bottomStuff {
+    font-size: 0.75rem;
+  }
 }
