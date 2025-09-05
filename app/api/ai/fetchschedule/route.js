@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
+
 //POST request to gemeini (to generate a Schedule)
 export async function POST(req) {
   const { noOfDays, dishCountry } = await req.json();
@@ -8,7 +10,7 @@ export async function POST(req) {
 
   try {
     const response = await axios({
-      url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCSN16glxT4HA1n0N592f_pMqkmvnG4a5w`,
+      url: `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
       method: "POST",
       data: {
         contents: [
