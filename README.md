@@ -40,7 +40,13 @@ MealMate is a React app that helps you generate delicious meals and their recipe
 
 ## Screenshots
 
-<!-- Add screenshots of the app here -->
+<div>
+	<img src="/screenshots/Screenshot (5).png" alt="About" width="200" />
+	<img src="/screenshots/Screenshot (6).png" alt="About" width="200" />
+	<img src="/screenshots/Screenshot (7).png" alt="About" width="200" />
+	<img src="/screenshots/Screenshot (8).png" alt="About" width="200" />
+	<img src="/screenshots/Screenshot (9).png" alt="About" width="200" />
+</div>
 
 ---
 
@@ -48,7 +54,7 @@ MealMate is a React app that helps you generate delicious meals and their recipe
 
 1. Clone the repo
 2. Install dependencies: `npm install`
-3. Add your API keys to `.env.local` (see example in repo)
+3. Add your API keys to `.env.local`
 4. Run the app: `npm run dev`
 
 ---
